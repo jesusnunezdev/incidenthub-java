@@ -1,23 +1,42 @@
 public class Main {
 
-    public static String calcularPrioridad(int usuarios, boolean servicioCaido) {
 
-        if(servicioCaido && usuarios >= 100) {
-            return "CRITICA";
-        } else if(servicioCaido || usuarios >= 50) {
-            return "ALTA";
-        } else {
-            return "BAJA";
-        }
-    }
+
 
     public static void main(String[] args) {
-        System.out.println("===INCIDENTHUB===");
-        System.out.println(calcularPrioridad(300, true));
-        System.out.println(calcularPrioridad(20, true));
-        System.out.println(calcularPrioridad(70, false));
-        System.out.println(calcularPrioridad(5, false));
-        System.out.println(calcularPrioridad(50, false));
+
+
+        Incidente incidente1 = new Incidente("Servidor caido", 300, true);
+        System.out.println(incidente1.calcularPrioridad());
+        Incidente incidente2 = new Incidente("Servidor activo", 20, false);
+        System.out.println(incidente2.calcularPrioridad());
+        Incidente incidente3 = new Incidente("Servidor caido", 75, true);
+        System.out.println(incidente3.calcularPrioridad());
+
+        Incidente[] incidentes = {incidente1, incidente2, incidente3};
+        int n = incidentes.length;
+
+        for (int i = 0; i < n; i++) {
+            System.out.println(incidentes[i].getTitulo() + " - " + incidentes[i].calcularPrioridad());
+        }
+
+        System.out.println("=== PRUEBAS DE VALIDACION ===");
+
+        try{
+            Incidente prueba = new Incidente("Error", -10, true);
+            System.out.println("ERROR: acepto usuarios negativos");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Prueba 1 OK: " + e.getMessage());
+        }
+
+        try {
+            incidente1.setUsuariosAfectados(-500);
+            System.out.println("ERROR: acepto usuarios negativos");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Prueba 2 OK: " + e.getMessage());
+        }
+
     }
+
 
 }
