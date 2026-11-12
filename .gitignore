@@ -1,0 +1,13 @@
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Archivos compilados
+out/
+*.class
+target/
+
+# Archivos locales y secretos
+.env
+.env.*
